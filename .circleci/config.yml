@@ -50,9 +50,12 @@ jobs:
 
       # prepare the database
       - run: touch storage/testing.sqlite
-      - run: php artisan migrate --env=testing --database=sqlite_testing --force
+      - run: php artisan migrate
+      - run: php artisan db:seed
 
       # run tests with phpunit or codecept
       #- run: ./vendor/bin/phpunit
-      - run: ./vendor/bin/codecept build
-      - run: ./vendor/bin/codecept run
+      - run: php vendor/bin/phpunit --coverage-text --colors=never
+      - run: npm test
+      #- run: ./vendor/bin/codecept build
+      #- run: ./vendor/bin/codecept run
