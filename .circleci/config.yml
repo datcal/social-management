@@ -65,6 +65,7 @@ jobs:
             - ~/.yarn
 
       # prepare the database
+      - run: php artisan key:generate --env=testing
       - run: touch storage/testing.sqlite
       - run: php artisan migrate --env=testing --database=sqlite --force
 
